@@ -37,7 +37,7 @@ unsigned char getcSPI_master(void) {
 void spi_slave_init() {
 
     SETBIT(DDRB, PB3);
-    SETBITS(SPCR, (1 << SPE) | (1 << CPOL));
+    SPCR |= (1 << SPE) | (1 << CPOL);
 
 }
 

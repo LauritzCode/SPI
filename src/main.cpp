@@ -8,8 +8,11 @@
 #include "setup/ssd1306.h" 
 #include "setup/macros.h"
 #include "setup/spi.h"
+#include "setup/temp.h"
+#include <string.h>
 
 volatile uint8_t sw_flag = 0;
+
 
 void hw_init(){
 
@@ -37,17 +40,16 @@ int main(void) {
 
     while(1) {
 
-     _delay_ms(100);
-     print_centered((unsigned char*)"Transmission:", 2);
+     
+    print_centered("Temperatur:", 2);
 
-     unsigned char data = putcSPI_master('a');
-
-     char data_con[2];
-     sprintf(data_con, "%c", data);
-     sendStrXY(data_con, 4, 4);
-   
-    }
+    char temp_read[16];
+        
+    temp_convert(temp_read);
+    print_centered(temp_read, 4);
+    _delay_ms(500);
  }
+}
 
 
 
